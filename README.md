@@ -2,7 +2,7 @@
 ICD 9 /10 code and CCI 
 
 
-Read file:
+### Read ICD9/10 Mapping file:
 ```SAS
 Data mapping;
 infile '~\ICD9_mapping_ICD10.txt'
@@ -18,4 +18,28 @@ input
                  Code_Description $
      ;
  run;
+```
+### Read ICD code:
+```SAS
+PROC IMPORT OUT= WORK.CCI
+            DATAFILE= "~\ICD-10.xlsx" 
+            DBMS=EXCEL REPLACE;
+     GETNAMES=YES;
+     MIXED=NO;
+     SCANTEXT=YES;
+     USEDATE=YES;
+     SCANTIME=YES;
+RUN;
+```
+### Read ICD code with CCI weights:
+```SAS
+PROC IMPORT OUT= WORK.CCI
+            DATAFILE= "~\ICD10_withCCI.xlsx" 
+            DBMS=EXCEL REPLACE;
+     GETNAMES=YES;
+     MIXED=NO;
+     SCANTEXT=YES;
+     USEDATE=YES;
+     SCANTIME=YES;
+RUN;
 ```
